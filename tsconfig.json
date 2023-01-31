@@ -12,6 +12,11 @@
     // Компилятор будет обрабатывать не только TS файлы, но и JS файлы
     "allowJs": true,
     "moduleResolution": "node",
+    // Absolete Import qlish uchun
+    "baseUrl": ".",
+    "paths": {
+      "*": ["./src/*"]
+    },
     // esModuleInterop common js ishlatadigan paketlar bn doimgi import export lar orqali ishlash imkonini beradi. (require() module.export) = common js
     // import Moment from 'moment';
     // без флага esModuleInterop результат undefined

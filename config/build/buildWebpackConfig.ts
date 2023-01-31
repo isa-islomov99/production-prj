@@ -28,7 +28,7 @@ export function buildWebpackConfig(options: BuildOptions): webpack.Configuration
       rules: buildLoaders(options),
     },
     // Bu Resolve bizga file ni import qilganimizda oxiridagi qushimcha js, jsx, tsx larni yozmaslik imkonini beradi
-    resolve: buildResolvers(),
+    resolve: buildResolvers(options),
     // Bu bizga biron file da error chiqqanda qaysi error aynan qaysi file da ekanligini kursatib beradi, agar bu bumasa misol 10 ta js file 1 ta build ga yigilganda
     // error ni qayerdan chiqqan ekanligini bila olmasdik
     devtool: isDev ? "inline-source-map" : undefined,
