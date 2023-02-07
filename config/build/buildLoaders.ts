@@ -4,6 +4,12 @@ import {BuildOptions} from "./types/config";
 
 export function buildLoaders({isDev}: BuildOptions): webpack.RuleSetRule[] {
 
+  // svg file larni webpack tushuna olishi va biz ishlata olishimiz uchun kere
+  const svgLoader = {
+    test: /\.svg$/,
+    use: ['@svgr/webpack']
+  }
+
   const cssLoader = {
     test: /\.s[ac]ss$/i,
     use: [
@@ -34,8 +40,20 @@ export function buildLoaders({isDev}: BuildOptions): webpack.RuleSetRule[] {
     exclude: /node_modules/,
   }
 
+  // Png, Jpg rasmlarni webpack tushuna olishi va biz ishlata olishimiz uchun kere
+  const fileLoader = {
+      test: /\.(png|jpe?g|gif|woff2|woff)$/i,
+      use: [
+        {
+          loader: 'file-loader',
+        },
+      ],
+    }
+
   return [
     typescriptLoader,
-    cssLoader
+    cssLoader,
+    fileLoader,
+    svgLoader
   ]
 }

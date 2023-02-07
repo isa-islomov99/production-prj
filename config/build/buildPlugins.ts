@@ -3,7 +3,7 @@ import webpack from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BuildOptions} from "./types/config";
 
-export function buildPlugins({paths}: BuildOptions): webpack.WebpackPluginInstance[] {
+export function buildPlugins({paths, isDev}: BuildOptions): webpack.WebpackPluginInstance[] {
   return [
     // HtmlWebpackPlugin index.html file ga hamma js file, script larni boglash yani usherga yigishini taminlab beradi
     new HtmlWebpackPlugin({
@@ -16,7 +16,13 @@ export function buildPlugins({paths}: BuildOptions): webpack.WebpackPluginInstan
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].css'
-    })
+    }),
+    // webpack dagi bron bir globalniy qiymatni prj dagi webpack dan tashqari boshqa file larda ishlatish imkonini beradi
+    new webpack.DefinePlugin({
+      __IS_DEV__: JSON.stringify(isDev),
+    }),
+    // ushbu plugin prj ni biron qismidia uzgarish qilgnanimizda page ni refresh qimasdan uzi automatic yangilab beradi uzgarishlarni
+    new webpack.HotModuleReplacementPlugin(),
   ]
 }
 
